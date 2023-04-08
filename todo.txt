@@ -1,0 +1,10 @@
+fetch todo and place in DOM limit to 5
+
+show dark background if todo is completed
+
+add a todo 
+
+update by clicking the completed value
+
+double click to delete todo 
+
