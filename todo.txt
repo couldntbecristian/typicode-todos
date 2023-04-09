@@ -7,4 +7,3 @@ add a todo
 update by clicking the completed value
 
 double click to delete todo 
-
