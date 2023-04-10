@@ -1,7 +1,8 @@
 const apiUrl = 'https://jsonplaceholder.typicode.com/todos?_limit=5'
-const todoList = document.getElementById('todo-list')
-const addBtn = document.getElementById('addBtn')
+// const addBtn = document.getElementById('addBtn')
+const todoForm = document.getElementById('todo-form')
 const todoInput = document.getElementById('title')
+const todoList = document.getElementById('todo-list')
 
 function fetchTodo(){
   fetch(apiUrl)
@@ -12,11 +13,43 @@ function fetchTodo(){
     })
 }
 
-function displayTodo(data){
-  const todoDiv = document.createElement('div')
-  const todoTitle = document.createTextNode(data.title) 
+function addTodoSubmit(e){
+  e.preventDefault()
+  
+  const newTodo = todoInput.value.trim()
 
-  if(data.completed){
+  // validate input
+  if (newTodo === ''){
+    return 
+  }
+  
+  addNewTodo(newTodo)
+  todoInput.value = ''
+}
+
+// Add todo to api
+function addNewTodo(todo){
+  fetch(apiUrl, {
+    method: 'POST',
+    body: JSON.stringify({
+      title: todo,
+      completed: false
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+    .then(data => {
+      displayTodo(data)
+      console.log(data)
+    })
+}
+
+function displayTodo(todo){
+  const todoDiv = document.createElement('div')
+  const todoTitle = document.createTextNode(todo.title) 
+
+  if(todo.completed){
     todoDiv.classList = 'done'
   }
 
@@ -25,6 +58,6 @@ function displayTodo(data){
 }
 
 
-// addBtn.addEventListener('click', addTodo)
+todoForm.addEventListener('submit', addTodoSubmit)
 
 fetchTodo()
