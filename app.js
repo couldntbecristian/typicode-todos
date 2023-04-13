@@ -49,9 +49,6 @@ function displayTodo(todo){
   const todoDiv = document.createElement('div')
   const todoTitle = document.createTextNode(todo.title) 
 
-  // if(todo.completed){
-  //   todoDiv.classList = 'done'
-  // }
   isCompleted(todoDiv, todo)
 
   todoDiv.appendChild(todoTitle)
@@ -62,22 +59,13 @@ function displayTodo(todo){
   todoDiv.addEventListener('click', (e) => {
     todo.completed = true
 
-  //     if(todo.completed){
-  //   todoDiv.classList = 'done'
-  // }
   isCompleted(todoDiv, todo)
   })
+
+  todoDiv.addEventListener('dblclick', (e) => {
+    todoList.removeChild(e.target)
+  })
 }
-
-// my original isCompleted()
-  // 'the todo argument that you are passing to isCompleted is an object with a completed property, not a DOM element that you can add a class to. You need to pass the actual DOM element that you want to modify as an argument to isCompleted (todoDiv)'
-// function isCompleted(todo) {
-//  if(todo.completed){
-//    todo.classList = 'done'
-// 'you are trying to set the classList property of the todo argument to 'done', but classList is a property of DOM elements, not objects. You should be using the classList property of the actual DOM element.'
-//     }
-//   }
-
 
 function isCompleted(todoDiv, todo) {
     if(todo.completed){
